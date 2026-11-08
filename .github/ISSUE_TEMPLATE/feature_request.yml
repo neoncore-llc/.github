@@ -1,0 +1,33 @@
+name: Feature Request
+description: Suggest a new visual indicator, automation preset, or menu enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: Product / Profile
+      options:
+        - NeonCore Portal & Account (neoncore.llc)
+        - Age of Empires IV & RTSLytics
+        - Path of Exile 1 / Path of Exile 2
+        - Dota 2
+        - Deadlock
+        - Minecraft
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what_it_does
+    attributes:
+      label: What should this feature do for the player?
+      description: Describe what useful information it shows or what in-game action it automates.
+    validations:
+      required: true
+  - type: textarea
+    id: how_to_use
+    attributes:
+      label: How should the player use or configure it?
+      description: Describe where it should appear in the menu, what hotkey or slider it should use, or how presets should work.
+    validations:
+      required: true

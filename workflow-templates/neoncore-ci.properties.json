@@ -1,0 +1,9 @@
+{
+  "name": "NeonCore Standard CI Pipeline",
+  "description": "Least-privilege CI workflow with concurrency control, JSON/config verification, and automated quality gates.",
+  "iconName": "neoncore-icon",
+  "categories": [
+    "Continuous Integration",
+    "Automation"
+  ]
+}

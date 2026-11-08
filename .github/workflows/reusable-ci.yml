@@ -1,0 +1,44 @@
+name: Reusable Organization CI
+
+on:
+  workflow_call:
+    inputs:
+      verify_devcontainer:
+        description: "Verify 5-file .devcontainer structure if present"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene-and-config:
+    name: Organization Config & DevContainer Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          python3 -c "
+          import json, pathlib, sys
+          for p in pathlib.Path('.').rglob('*.json'):
+              if '.git' in p.parts or 'node_modules' in p.parts:
+                  continue
+              lines = [l for l in p.read_text(encoding='utf-8').splitlines() if not l.strip().startswith('//')]
+              json.loads('\n'.join(lines))
+          print('JSON validation passed.')
+          "
+
+      - name: Verify DevContainer files
+        if: inputs.verify_devcontainer && hashFiles('.devcontainer/devcontainer.json') != ''
+        run: |
+          for f in Dockerfile devcontainer.json post_install.py .zshrc install.sh; do
+            test -f ".devcontainer/$f" || { echo "Missing .devcontainer/$f"; exit 1; }
+          done
+          python3 -m py_compile .devcontainer/post_install.py
+          bash -n .devcontainer/install.sh
+          echo "DevContainer verification passed."

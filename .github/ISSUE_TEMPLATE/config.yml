@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: NeonCore Web Portal & Account Support
+    url: https://neoncore.llc
+    about: Manage subscriptions, cloud profiles, and account settings at neoncore.llc
+  - name: Product Catalog & Status
+    url: https://neoncore.llc/products
+    about: View supported titles, feature descriptions, and product status
+  - name: Private Security Disclosure
+    url: https://github.com/neoncore-llc/.github/blob/main/SECURITY.md
+    about: Please report security vulnerabilities privately via SECURITY.md or support@neoncore.llc

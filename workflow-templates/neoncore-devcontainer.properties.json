@@ -1,0 +1,9 @@
+{
+  "name": "NeonCore DevContainer Verification",
+  "description": "Validates the standardized 5-file DevContainer setup (Dockerfile, devcontainer.json, post_install.py, .zshrc, install.sh).",
+  "iconName": "neoncore-icon",
+  "categories": [
+    "Continuous Integration",
+    "Containers"
+  ]
+}

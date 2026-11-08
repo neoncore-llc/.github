@@ -1,0 +1,50 @@
+name: Bug Report
+description: Report an unexpected issue with a feature, menu option, or profile preset
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report an issue. Please describe what happened from the user perspective so our team can reproduce it quickly.
+  - type: dropdown
+    id: product
+    attributes:
+      label: Product / Profile
+      description: Which NeonCore product or service does this affect?
+      options:
+        - NeonCore Portal & Account (neoncore.llc)
+        - Age of Empires IV & RTSLytics
+        - Path of Exile 1 / Path of Exile 2
+        - Dota 2
+        - Deadlock
+        - Minecraft
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the unexpected behavior clearly.
+      placeholder: When enabling the feature in the menu...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this behavior?
+      placeholder: |
+        1. Select profile...
+        2. Open the in-game menu and toggle...
+        3. Press hotkey...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true

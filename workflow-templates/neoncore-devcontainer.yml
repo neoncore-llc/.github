@@ -1,0 +1,39 @@
+name: NeonCore DevContainer Verification
+
+on:
+  push:
+    branches: [$default-branch]
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/devcontainer.yml'
+  pull_request:
+    branches: [$default-branch]
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/devcontainer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verify-devcontainer:
+    name: Verify DevContainer 5-File Setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check DevContainer files & syntax
+        run: |
+          for f in Dockerfile devcontainer.json post_install.py .zshrc install.sh; do
+            test -f ".devcontainer/$f" || { echo "Missing .devcontainer/$f"; exit 1; }
+          done
+          python3 -m py_compile .devcontainer/post_install.py
+          bash -n .devcontainer/install.sh
+          echo "DevContainer 5-file structure verified."

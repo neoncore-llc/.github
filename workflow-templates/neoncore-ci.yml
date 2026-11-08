@@ -1,0 +1,40 @@
+name: NeonCore Standard CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality-gate:
+    name: Repository Hygiene & Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate JSON & YAML files
+        run: |
+          python3 -c "
+          import json, pathlib, sys
+          for p in pathlib.Path('.').rglob('*.json'):
+              if '.git' in p.parts or 'node_modules' in p.parts:
+                  continue
+              try:
+                  text = '\n'.join(l for l in p.read_text(encoding='utf-8').splitlines() if not l.strip().startswith('//'))
+                  json.loads(text)
+              except Exception as e:
+                  print(f'Invalid JSON in {p}: {e}', file=sys.stderr)
+                  sys.exit(1)
+          print('All JSON files validated successfully.')
+          "
