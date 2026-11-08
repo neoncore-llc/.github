@@ -1,0 +1,179 @@
+# NeonCore LLC — Multi-Repository Coordination & Topology Manifest
+version: 1
+organization: neoncore-llc
+
+coordination:
+  topology: hierarchical
+  sync:
+    default: eventual
+    overrides:
+      security-updates: strong
+      dependency-updates: strong
+      documentation: eventual
+
+teams:
+  core-maintainers: "@neoncore-llc/core-maintainers"
+  platform-ops: "@neoncore-llc/platform-ops"
+  security-team: "@neoncore-llc/security-team"
+
+repositories:
+  - name: .github
+    tier: governance
+    role: org-profile-and-templates
+    visibility: public
+    team: platform-ops
+
+  - name: .github-private
+    tier: governance
+    role: internal-member-dashboard
+    visibility: private
+    team: platform-ops
+
+  - name: neoncore-workspace
+    tier: umbrella
+    role: orchestrator-and-e2e-harness
+    visibility: private
+    team: platform-ops
+
+  - name: neoncore-ops
+    tier: umbrella
+    role: vds-operations-and-hardening
+    visibility: private
+    team: platform-ops
+
+  - name: neoncore-shared
+    tier: tier-0-foundation
+    role: shared-foundation
+    visibility: private
+    team: core-maintainers
+
+  - name: neoncore-aoe4
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: AOE4-Analytics
+    tier: tier-1-product
+    role: analytics-platform
+    visibility: private
+    team: core-maintainers
+
+  - name: neoncore-poe
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: NeonCore-PoE1
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared, neoncore-poe]
+
+  - name: NeonCore-PoE2
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared, neoncore-poe]
+
+  - name: neoncore-dota2
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-deadlock
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-minecraft
+    tier: tier-1-product
+    role: product-module
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-site
+    tier: tier-2-platform
+    role: web-portal-and-billing
+    visibility: private
+    team: platform-ops
+
+  - name: neoncore-auth
+    tier: tier-2-platform
+    role: licensing-and-marketplace-api
+    visibility: private
+    team: platform-ops
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-loader
+    tier: tier-2-platform
+    role: desktop-client
+    visibility: private
+    team: platform-ops
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-hwid
+    tier: tier-2-platform
+    role: device-verification-service
+    visibility: private
+    team: security-team
+    depends_on: [neoncore-shared]
+
+  - name: neoncore-packages
+    tier: tier-2-platform
+    role: cloud-packages
+    visibility: private
+    team: core-maintainers
+    depends_on: [neoncore-shared]
+
+  - name: aoe4-hv
+    tier: tier-3-research
+    role: hypervisor-research
+    visibility: private
+    team: security-team
+
+  - name: NeonVisor
+    tier: tier-3-research
+    role: hypervisor-research
+    visibility: private
+    team: security-team
+
+  - name: AOE4-SDK-Reference
+    tier: tier-3-research
+    role: sdk-reference
+    visibility: private
+    team: core-maintainers
+
+  - name: sourcegame_steam_session_deobf
+    tier: tier-3-research
+    role: protocol-research
+    visibility: private
+    team: security-team
+
+  - name: vac-standalone
+    tier: tier-3-research
+    role: standalone-research
+    visibility: private
+    team: security-team
+
+  - name: vac
+    tier: public-reference
+    role: reference-reconstruction
+    visibility: public
+    team: security-team
+
+  - name: AOE4HOOK
+    tier: archived-legacy
+    role: archived-monolith
+    visibility: private
+    archived: true

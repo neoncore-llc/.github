@@ -1,0 +1,40 @@
+# NeonCore LLC — Automated Code Review & Quality Gates Configuration
+version: 1
+review:
+  auto-trigger: true
+  required-agents:
+    - security
+    - performance
+    - architecture
+    - style
+
+  thresholds:
+    security: block
+    architecture: block
+    performance: warn
+    style: suggest
+
+  rules:
+    security:
+      - no-hardcoded-secrets
+      - no-raw-binaries-in-git
+      - least-privilege-workflow-permissions
+      - strict-user-facing-opsec
+    performance:
+      - concurrency-cancel-in-progress
+      - deterministic-caching
+    architecture:
+      - boundary-discipline
+      - idempotent-operations
+      - fail-closed-push-sequencing
+
+  triggers:
+    high-risk-pipeline:
+      paths:
+        - "ci/**"
+        - "docker/**"
+        - ".devcontainer/**"
+        - ".github/**"
+      agents: ["security", "architecture"]
+      depth: "comprehensive"
+      require-approval: true

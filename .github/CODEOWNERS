@@ -1,2 +1,7 @@
-# Default Organization Code Owners
-* @ccsimplyspolit
+# NeonCore Workspace Code Owners (Team RBAC)
+* @ccsimplyspolit @neoncore-llc/core-maintainers
+/.devcontainer/ @ccsimplyspolit @neoncore-llc/platform-ops
+/.github/ @ccsimplyspolit @neoncore-llc/platform-ops @neoncore-llc/security-team
+/ci/ @ccsimplyspolit @neoncore-llc/platform-ops
+/docker/ @ccsimplyspolit @neoncore-llc/platform-ops @neoncore-llc/security-team
+/tests/ @ccsimplyspolit @neoncore-llc/core-maintainers @neoncore-llc/platform-ops
