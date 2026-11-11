@@ -14,7 +14,7 @@
       "version": "8.0",
       "additionalVersions": "10.0"
     },
-    "ghcr.io/devcontainers/features/node:1": {
+    "ghcr.io/devcontainers/features/node:2": {
       "version": "22"
     },
     "ghcr.io/devcontainers/features/java:1": {
